@@ -144,7 +144,7 @@
                   class="emoji {searchMode && i === activeSearchItem ? 'active' : ''}"
                   id="emo-{emoji.id}">
             {#if emoji.unicode}
-              {unicodeWithSkin(emoji, currentSkinTone)}
+              {renderEmoji(unicodeWithSkin(emoji, currentSkinTone))}
             {:else}
               <img class="custom-emoji" src={emoji.url} alt="" loading="lazy" />
             {/if}

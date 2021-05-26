@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const,no-labels,no-inner-declarations */
-
+import twemoji from 'twemoji';
 import Database from '../../ImportedDatabase'
 import enI18n from '../../i18n/en'
 import { groups as defaultGroups, customGroup } from '../../groups'
