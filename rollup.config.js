@@ -1,5 +1,6 @@
 import cjs from '@rollup/plugin-commonjs'
-import resolve from '@rollup/plugin-node-resolve'
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
 import replace from '@rollup/plugin-replace'
 import mainSvelte from 'rollup-plugin-svelte'
 import hotSvelte from 'rollup-plugin-svelte-hot'
@@ -40,7 +41,10 @@ preprocessConfig.markup = async function () {
 // Most of this has to happen because customElements.define() has side effects
 const baseConfig = {
   plugins: [
-    resolve(),
+    resolve({
+      browser: true,
+      dedupe: ["svelte"]
+    }),
     cjs(),
     replace({
       'process.env.NODE_ENV': dev ? '"development"' : '"production"',
@@ -56,7 +60,8 @@ const baseConfig = {
       dev,
       preprocess: preprocessConfig
     }),
-    !dev && analyze({ summaryOnly: true })
+    !dev && analyze({ summaryOnly: true }),
+    commonjs()
   ],
   external: [
     './database.js',

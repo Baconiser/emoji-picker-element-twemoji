@@ -43,7 +43,7 @@
               aria-expanded={skinTonePickerExpanded}
               aria-controls="skintone-list"
               on:click={onClickSkinToneButton}>
-        {renderEmoji(skinToneButtonText)}
+        {@html renderEmoji(skinToneButtonText)}
       </button>
     </div>
     <span id="skintone-description" class="sr-only">{i18n.skinToneDescription}</span>
@@ -69,8 +69,10 @@
                 role="option"
                 title={i18n.skinTones[i]}
                 tabindex="-1"
-                aria-label={i18n.skinTones[i]}>
-          {renderEmoji(skinTone)}
+                aria-label={i18n.skinTones[i]}
+                value="skinTone"
+      >
+          {@html renderEmoji(skinTone)}
         </div>
       {/each}
     </div>
@@ -90,7 +92,7 @@
               title={i18n.categories[group.name]}
               on:click={() => onNavClick(group)}>
         <div class="emoji">
-          {renderEmoji(group.emoji)}
+          {@html renderEmoji(group.emoji)}
         </div>
       </button>
     {/each}
@@ -144,7 +146,7 @@
                   class="emoji {searchMode && i === activeSearchItem ? 'active' : ''}"
                   id="emo-{emoji.id}">
             {#if emoji.unicode}
-              {renderEmoji(unicodeWithSkin(emoji, currentSkinTone))}
+              {@html renderEmoji(unicodeWithSkin(emoji, currentSkinTone)) }
             {:else}
               <img class="custom-emoji" src={emoji.url} alt="" loading="lazy" />
             {/if}
@@ -170,7 +172,7 @@
               class="emoji"
               id="fav-{emoji.id}">
         {#if emoji.unicode}
-          {renderEmoji(unicodeWithSkin(emoji, currentSkinTone))}
+          {@html renderEmoji(unicodeWithSkin(emoji, currentSkinTone))}
         {:else}
           <img class="custom-emoji" src={emoji.url} alt="" loading="lazy" />
         {/if}
