@@ -43,7 +43,7 @@
               aria-expanded={skinTonePickerExpanded}
               aria-controls="skintone-list"
               on:click={onClickSkinToneButton}>
-        {skinToneButtonText}
+        {renderEmoji(skinToneButtonText)}
       </button>
     </div>
     <span id="skintone-description" class="sr-only">{i18n.skinToneDescription}</span>
@@ -70,7 +70,7 @@
                 title={i18n.skinTones[i]}
                 tabindex="-1"
                 aria-label={i18n.skinTones[i]}>
-          {skinTone}
+          {renderEmoji(skinTone)}
         </div>
       {/each}
     </div>
@@ -90,7 +90,7 @@
               title={i18n.categories[group.name]}
               on:click={() => onNavClick(group)}>
         <div class="emoji">
-          {group.emoji}
+          {renderEmoji(group.emoji)}
         </div>
       </button>
     {/each}
@@ -170,7 +170,7 @@
               class="emoji"
               id="fav-{emoji.id}">
         {#if emoji.unicode}
-          {unicodeWithSkin(emoji, currentSkinTone)}
+          {renderEmoji(unicodeWithSkin(emoji, currentSkinTone))}
         {:else}
           <img class="custom-emoji" src={emoji.url} alt="" loading="lazy" />
         {/if}

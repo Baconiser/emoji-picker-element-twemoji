@@ -3,11 +3,20 @@
 import Database from '../../ImportedDatabase'
 import enI18n from '../../i18n/en'
 import { groups as defaultGroups, customGroup } from '../../groups'
-import { DEFAULT_LOCALE, DEFAULT_DATA_SOURCE } from '../../../database/constants'
-import { MIN_SEARCH_TEXT_LENGTH, NUM_SKIN_TONES } from '../../../shared/constants'
+import {
+  DEFAULT_LOCALE,
+  DEFAULT_DATA_SOURCE
+} from '../../../database/constants'
+import {
+  MIN_SEARCH_TEXT_LENGTH,
+  NUM_SKIN_TONES
+} from '../../../shared/constants'
 import { requestIdleCallback } from '../../utils/requestIdleCallback'
 import { hasZwj } from '../../utils/hasZwj'
-import { emojiSupportLevelPromise, supportedZwjEmojis } from '../../utils/emojiSupport'
+import {
+  emojiSupportLevelPromise,
+  supportedZwjEmojis
+} from '../../utils/emojiSupport'
 import { logError, log } from '../../../shared/log'
 import { applySkinTone } from '../../utils/applySkinTone'
 import { halt } from '../../utils/halt'
@@ -138,8 +147,10 @@ $: {
       }
     }
   }
+
   if (database) {
-    /* no await */ handleDatabaseLoading()
+    /* no await */
+    handleDatabaseLoading()
   }
 }
 
@@ -213,7 +224,9 @@ $: {
       currentSkinTone = await database.getPreferredSkinTone()
     }
   }
-  /* no await */ updatePreferredSkinTone()
+
+  /* no await */
+  updatePreferredSkinTone()
 }
 
 $: skinTones = Array(NUM_SKIN_TONES).fill().map((_, i) => applySkinTone(skinToneEmoji, i))
@@ -232,8 +245,10 @@ $: {
       database.getEmojiByUnicodeOrName(unicode)
     )))).filter(Boolean) // filter because in Jest tests we don't have all the emoji in the DB
   }
+
   if (databaseLoaded) {
-    /* no await */ updateDefaultFavoriteEmojis()
+    /* no await */
+    updateDefaultFavoriteEmojis()
   }
 }
 
@@ -249,7 +264,8 @@ $: {
   }
 
   if (databaseLoaded && defaultFavoriteEmojis) {
-    /* no await */ updateFavorites()
+    /* no await */
+    updateFavorites()
   }
 }
 
@@ -334,7 +350,9 @@ $: {
       }
     }
   }
-  /* no await */ updateEmojis()
+
+  /* no await */
+  updateEmojis()
 }
 
 // Some emojis have their ligatures rendered as two or more consecutive emojis
@@ -493,6 +511,10 @@ function onNavClick (group) {
   currentGroupIndex = groups.findIndex(_ => _.id === group.id)
 }
 
+function renderEmoji (emoji) {
+  return twemoji.parse(emoji, { ext: ".svg", folder: "svg" })
+}
+
 // eslint-disable-next-line no-unused-vars
 function onNavKeydown (event) {
   const { target, key } = event
@@ -545,7 +567,8 @@ async function onEmojiClick (event) {
   halt(event)
   const id = target.id.substring(4) // replace 'emo-' or 'fav-' prefix
 
-  /* no await */ clickEmoji(id)
+  /* no await */
+  clickEmoji(id)
 }
 
 //
@@ -564,7 +587,8 @@ async function onSkinToneOptionsClick (event) {
   skinTonePickerExpanded = false
   focus('skintone-button')
   fireEvent('skin-tone-change', { skinTone })
-  /* no await */ database.setPreferredSkinTone(skinTone)
+  /* no await */
+  database.setPreferredSkinTone(skinTone)
 }
 
 // eslint-disable-next-line no-unused-vars
