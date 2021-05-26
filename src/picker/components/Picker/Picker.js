@@ -564,7 +564,11 @@ async function clickEmoji (unicodeOrName) {
 // eslint-disable-next-line no-unused-vars
 async function onEmojiClick (event) {
   const { target: clickedOn } = event;
-  const target = clickedOn.parentElement;
+  let target = clickedOn;
+  if(clickedOn instanceof HTMLImageElement) {
+    target = clickedOn.parentElement;
+  }
+
   if (!target.classList.contains('emoji')) {
     return
   }
@@ -581,8 +585,11 @@ async function onEmojiClick (event) {
 
 // eslint-disable-next-line no-unused-vars
 async function onSkinToneOptionsClick (event) {
-  const { target: clickedOn } = event
-  const target = clickedOn.parentElement;
+  const { target: clickedOn } = event;
+  let target = clickedOn;
+  if(clickedOn instanceof HTMLImageElement) {
+    target = clickedOn.parentElement;
+  }
   if (!isSkinToneOption(target)) {
     return
   }
